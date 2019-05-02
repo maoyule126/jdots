@@ -3,19 +3,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>jdots-server</artifactId>
+        <artifactId>jdots</artifactId>
         <groupId>myl.jdots</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>performer</artifactId>
-
-    <name>performer</name>
+    <artifactId>jdots-performer</artifactId>
+    <name>jdots-performer</name>
     <url>http://www.example.com</url>
 
     <properties>
-        <final-name>JDotPerformer</final-name>
+        <final-name>jdots-performer</final-name>
         <main-class>myl.jdots.JDotsPerformer</main-class>
     </properties>
 
@@ -23,6 +22,11 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>myl.jdots</groupId>
+            <artifactId>jdots-core</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
     <build>
