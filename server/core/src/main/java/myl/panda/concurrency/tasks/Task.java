@@ -1,7 +1,22 @@
 package myl.panda.concurrency.tasks;
 
+import myl.panda.concurrency.queues.ITaskQueue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
- * create by maoyule on 2019/1/9
  */
-public abstract class Task extends AbstractTask {
+public interface Task extends Runnable {
+    Logger logger = LoggerFactory.getLogger(Task.class);
+
+    @Override
+    default void run() {
+        try {
+            execute();
+        }catch (Exception e){
+            logger.error("{}, {}", this.toString(), e.getMessage(), e);
+        }
+    }
+
+    void execute();
 }

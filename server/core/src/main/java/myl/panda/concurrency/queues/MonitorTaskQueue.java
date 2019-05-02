@@ -1,7 +1,7 @@
 package myl.panda.concurrency.queues;
 
 import myl.panda.concurrency.pools.TaskPool;
-import myl.panda.concurrency.tasks.ITask;
+import myl.panda.concurrency.tasks.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +47,7 @@ public class MonitorTaskQueue extends AbstractTaskQueue {
     protected void doRun() {
         long startTime = System.currentTimeMillis();
         while (isRunning) {
-            ITask task = list.poll();
+            Task task = list.poll();
             if (task == null) {
                 break;
             }

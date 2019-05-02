@@ -1,7 +1,7 @@
 package myl.panda.concurrency;
 
 import myl.panda.concurrency.pools.TaskPool;
-import myl.panda.concurrency.tasks.ITask;
+import myl.panda.concurrency.tasks.Task;
 import myl.panda.dispose.Disposer;
 
 /**
@@ -60,7 +60,7 @@ public class BaseTaskFactory extends Disposer{
         slowPool = new TaskPool().init(slowThreadCount <= 0 ? procCount * 4 : slowThreadCount, "slow");
     }
 
-    public void add(ITask task){
+    public void add(Task task){
         mainPool.add(task);
     }
 
@@ -68,7 +68,7 @@ public class BaseTaskFactory extends Disposer{
         mainPool.submit(runnable);
     }
 
-    public void addSlow(ITask task){
+    public void addSlow(Task task){
         slowPool.add(task);
     }
 

@@ -1,12 +1,11 @@
 package myl.panda.concurrency.queues;
 
 import myl.panda.concurrency.pools.TaskPool;
-import myl.panda.concurrency.tasks.ITask;
+import myl.panda.concurrency.tasks.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Queue;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -16,7 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public abstract class AbstractTaskQueue implements ITaskQueue {
     private static final Logger logger = LoggerFactory.getLogger(AbstractTaskQueue.class);
 
-    protected Queue<ITask> list;
+    protected Queue<Task> list;
     private Lock lock;
     private volatile boolean isAdded;
 
@@ -58,17 +57,7 @@ public abstract class AbstractTaskQueue implements ITaskQueue {
     protected abstract void doRun();
 
     private void addToRun() {
-        while (true) {
-            boolean ret;
-            try {
-                ret = lock.tryLock(1L, TimeUnit.SECONDS);
-                if (ret) {
-                    break;
-                }
-            } catch (InterruptedException e) {
-                logger.error(e.getMessage(), e);
-            }
-        }
+        lock.lock();
         try {
             if (isAdded == false) {
                 try {
@@ -86,17 +75,7 @@ public abstract class AbstractTaskQueue implements ITaskQueue {
     }
 
     private void endAndRemove() {
-        while (true) {
-            boolean ret;
-            try {
-                ret = lock.tryLock(1L, TimeUnit.SECONDS);
-                if (ret) {
-                    break;
-                }
-            } catch (InterruptedException e) {
-                logger.error(e.getMessage(), e);
-            }
-        }
+        lock.lock();
         try {
             if (isAdded == true) {
                 isAdded = false;
@@ -107,14 +86,14 @@ public abstract class AbstractTaskQueue implements ITaskQueue {
                 isAdded = true;
             }
         } catch (Exception e) {
-
+            logger.error(e.getMessage(), e);
         } finally {
             lock.unlock();
         }
     }
 
     @Override
-    public void add(ITask task) {
+    public void add(Task task) {
         list.add(task);
         addToRun();
     }

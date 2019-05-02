@@ -2,21 +2,21 @@ package myl.panda.timers;
 
 import myl.panda.concurrency.BaseTaskFactory;
 import myl.panda.concurrency.queues.ITaskQueue;
-import myl.panda.concurrency.queues.TaskQueue;
-import myl.panda.concurrency.tasks.AbstractTask;
+import myl.panda.concurrency.tasks.Task;
 
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * create by maoyule on 2019/1/9
  */
-public abstract class LoopTask extends AbstractTask implements Delayed {
+public abstract class LoopTask implements Task, Delayed {
     private long delayTime;
     private long expireTime;
     private long loopCount = -1;
+    private ITaskQueue queue;
+
     /** 是否正处在触发未执行完状态 **/
     private AtomicBoolean attaching = new AtomicBoolean();
 
@@ -102,7 +102,11 @@ public abstract class LoopTask extends AbstractTask implements Delayed {
 
     @Override
     public void run() {
-        super.run();
+        try {
+            execute();
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+        }
         // 执行完，修改attaching状态为false.
         attaching.set(false);
     }

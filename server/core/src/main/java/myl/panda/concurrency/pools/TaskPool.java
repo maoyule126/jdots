@@ -1,7 +1,7 @@
 package myl.panda.concurrency.pools;
 
 import myl.panda.concurrency.queues.ITaskQueue;
-import myl.panda.concurrency.tasks.ITask;
+import myl.panda.concurrency.tasks.Task;
 import myl.panda.dispose.Disposer;
 
 import java.util.concurrent.*;
@@ -65,7 +65,7 @@ public class TaskPool extends Disposer {
                 new MyThreadFactory(sThreadName), new ThreadPoolExecutor.AbortPolicy());
     }
 
-    public void add(ITask task) {
+    public void add(Task task) {
         taskService.submit(task);
     }
 

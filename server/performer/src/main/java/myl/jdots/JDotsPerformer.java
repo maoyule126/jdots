@@ -1,6 +1,9 @@
 package myl.jdots;
 
+import myl.jdots.players.AbstractPlayer;
+import myl.jdots.players.Player;
 import myl.panda.PandaConfiguration;
+import myl.panda.concurrency.tasks.Task;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,6 +15,10 @@ public class JDotsPerformer {
 
     public static void main(String[] args){
         new PandaConfiguration().init();
-        logger.info("start");
+        Player player = new AbstractPlayer();
+        player.add(() -> {
+            logger.info("test ok");
+        });
+        logger.info("performer start");
     }
 }
