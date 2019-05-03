@@ -1,0 +1,56 @@
+server:
+  port: 8080
+  # 设定Session的追踪模式(cookie, url, ssl)
+  servlet:
+    session:
+      tracking-modes: cookie
+      timeout: 1h
+      cookie:
+        http-only: true
+        max-age: -1s
+spring:
+  thymeleaf:
+    mode: HTML
+    # 编码，可不用配置
+    encoding: UTF-8
+    # 开发配置为false,避免修改重启服务器
+    cache: false
+    # 配置模板类型
+    prefix=classpath: /templates/
+#  ### redis缓存配置
+#  ### 默认redis数据库未db0
+#    redis:
+#      database: 0
+#      host: 127.0.0.1
+#      port: 6379
+#      password:
+
+  #配置静态资源映射
+  mvc:
+    static-path-pattern: /**
+    resources:
+      static-locations: classpath:/static
+      # 资源缓存时间，单位秒，30天
+      cache.period: 30d
+      # 启用缓存
+      chain:
+          cache: true
+          # Enable the Spring Resource Handling chain. Disabled by default
+          enabled: true
+          # 开启版本控制策略，默认为false
+          strategy:
+            content:
+              enabled: true
+              # 指定要应用的版本的路径，多个以逗号分隔，默认为:[/**]
+              paths: /**
+#  main:
+#    allow-bean-definition-overriding: true
+#  config:
+#    location: ./
+#    name: spring-content.xml
+# 配置logback文件
+logback:
+  configurationFile: ./logback.xml
+
+
+

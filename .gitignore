@@ -50,3 +50,9 @@ client/node_modules/
 server/core/target/
 server/performer/target/
 server/server/target/
+server/jdots-server/HELP.md
+server/jdots-server/target/
+server/jdots-server/mvnw
+server/jdots-server/mvnw.cmd
+server/jdots-server/.mvn/
+server/logs/

@@ -11,7 +11,7 @@
   <modules>
     <module>core</module>
     <module>performer</module>
-    <module>server</module>
+    <module>jdots-server</module>
   </modules>
 
   <name>jdots</name>
