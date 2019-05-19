@@ -2,6 +2,7 @@ package myl.jdots.server;
 
 import de.felixroske.jfxsupport.AbstractJavaFxApplicationSupport;
 import javafx.stage.Stage;
+import myl.jdots.server.views.JdotsSplash;
 import myl.jdots.server.views.MainStageView;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,7 +18,7 @@ public class JdotsServerApplication extends AbstractJavaFxApplicationSupport {
 
 	public static void main(String[] args) {
 		//SpringApplication.run(JdotsServerApplication.class, args);
-		launch(JdotsServerApplication.class, MainStageView.class, args);
+		launch(JdotsServerApplication.class, MainStageView.class, new JdotsSplash(), args);
 	}
 
 }
