@@ -1,0 +1,9 @@
+.button{
+    -fx-background-color: #ddffee;
+    -webkit-fx-color: #000;
+    -moz-fx-color: #ff0000;
+    -ms-fx-color: #ff0000;
+    -o-fx-color: #ff0000;
+    -khtml-fx-color: #ff0000;
+    fx-color: #ff0000;
+}

@@ -73,7 +73,7 @@ public class HttpClient extends Disposer {
         request.headers().set(HttpHeaderNames.HOST, host);
         request.headers().set(HttpHeaderNames.CONNECTION,
                 HttpHeaderValues.KEEP_ALIVE);
-        request.headers().set(HttpHeaders.Names.ACCEPT_ENCODING, HttpHeaders.Values.GZIP);
+        request.headers().set(HttpHeaderNames.ACCEPT_ENCODING, HttpHeaderValues.GZIP);
         try {
             Channel channel = getChannel();
             channel.writeAndFlush(request);
